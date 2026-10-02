@@ -37,6 +37,25 @@ credentials, `.env` files, Firebase files, user records, or backend Git history.
 Untrusted pull requests run tests only and receive no R2 secrets. Production
 refresh runs only through a schedule or a manual run from the trusted branch.
 
+## Security controls
+
+- Refresh jobs run only from `main` and explicitly check out `main`.
+- R2 credentials are passed only to the refresh and status-reading steps, not
+  dependency installation or tests.
+- GitHub Actions are pinned to full commit IDs. Test checkout does not retain
+  Git credentials. External PRs never run the refresh workflow.
+- `main` rejects deletion and force pushes. Human changes require a PR and the
+  `test` check from GitHub Actions; no second reviewer is required for this
+  single-maintainer repository.
+- GitHub Actions alone bypasses the PR/check rule for direct daily report
+  commits. This bypass is app-wide, not path-scoped: trusted workflow code must
+  be reviewed carefully. The report step stages only `status.json` and rejects
+  other modified tracked files. The bot cannot bypass deletion/force-push rules.
+
+These controls limit mistakes and untrusted PR access. They do not protect
+against a compromised owner account, malicious trusted code, or a compromised
+runtime dependency. Keep account 2FA enabled and the R2 key bucket-scoped.
+
 The schedule checks sources every six hours, at 00:17, 06:17, 12:17 and 18:17 UTC.
 GitHub may delay schedules. Standard public Linux runners do not consume private
 repository minutes. R2 has separate storage and operation limits.
