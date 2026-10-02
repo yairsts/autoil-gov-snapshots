@@ -1,7 +1,0 @@
-node_modules/
-.env
-.env.*
-*.env
-etc/secrets/
-coverage/
-.DS_Store
