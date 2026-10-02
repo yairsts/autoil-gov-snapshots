@@ -19,6 +19,8 @@ test('refresh stays on main, actions stay pinned, and tests receive no R2 secret
     expect(actions).toHaveLength(2);
     for (const action of actions) expect(action).toMatch(/^actions\/[\w-]+@[a-f0-9]{40}$/);
   }
-  expect(refresh).toContain('git add status.json');
-  expect(refresh).toContain('Unexpected modified files; refusing to publish report');
+  expect(refresh).toContain('-f branch=snapshot-status');
+  expect(refresh).toContain('persist-credentials: false');
+  expect(refresh).not.toContain('git push');
+  expect(refresh).toContain('contents/status.json');
 });
