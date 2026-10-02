@@ -14,20 +14,18 @@ concurrency:
 
 jobs:
   refresh:
-    if: github.event_name == 'workflow_dispatch' || vars.REFRESH_ENABLED == 'true'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || vars.REFRESH_ENABLED == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 90
     permissions:
-      # Publish the real daily metadata report, not empty keep-alive commits.
+      # Publish metadata only to snapshot-status; main is protected by PR rules.
       contents: write
-    env:
-      PRIVATE_SNAPSHOT_R2_ACCOUNT_ID: ${{ secrets.PRIVATE_SNAPSHOT_R2_ACCOUNT_ID }}
-      PRIVATE_SNAPSHOT_R2_BUCKET: ${{ vars.PRIVATE_SNAPSHOT_R2_BUCKET }}
-      PRIVATE_SNAPSHOT_R2_WRITE_ACCESS_KEY_ID: ${{ secrets.PRIVATE_SNAPSHOT_R2_WRITE_ACCESS_KEY_ID }}
-      PRIVATE_SNAPSHOT_R2_WRITE_SECRET_ACCESS_KEY: ${{ secrets.PRIVATE_SNAPSHOT_R2_WRITE_SECRET_ACCESS_KEY }}
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: '24'
           cache: npm
@@ -39,21 +37,40 @@ jobs:
       - name: Refresh changed datasets
         id: sync
         if: steps.tests.outcome == 'success'
+        env:
+          PRIVATE_SNAPSHOT_R2_ACCOUNT_ID: ${{ secrets.PRIVATE_SNAPSHOT_R2_ACCOUNT_ID }}
+          PRIVATE_SNAPSHOT_R2_BUCKET: ${{ vars.PRIVATE_SNAPSHOT_R2_BUCKET }}
+          PRIVATE_SNAPSHOT_R2_WRITE_ACCESS_KEY_ID: ${{ secrets.PRIVATE_SNAPSHOT_R2_WRITE_ACCESS_KEY_ID }}
+          PRIVATE_SNAPSHOT_R2_WRITE_SECRET_ACCESS_KEY: ${{ secrets.PRIVATE_SNAPSHOT_R2_WRITE_SECRET_ACCESS_KEY }}
         run: npm run gov:resources:sync
+      - name: Read previous daily report
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/contents/status.json?ref=snapshot-status" > "$RUNNER_TEMP/previous-status.json"
+          jq -r .content "$RUNNER_TEMP/previous-status.json" | base64 --decode > status.json
       - name: Report current snapshots
         if: always()
         env:
+          PRIVATE_SNAPSHOT_R2_ACCOUNT_ID: ${{ secrets.PRIVATE_SNAPSHOT_R2_ACCOUNT_ID }}
+          PRIVATE_SNAPSHOT_R2_BUCKET: ${{ vars.PRIVATE_SNAPSHOT_R2_BUCKET }}
+          PRIVATE_SNAPSHOT_R2_WRITE_ACCESS_KEY_ID: ${{ secrets.PRIVATE_SNAPSHOT_R2_WRITE_ACCESS_KEY_ID }}
+          PRIVATE_SNAPSHOT_R2_WRITE_SECRET_ACCESS_KEY: ${{ secrets.PRIVATE_SNAPSHOT_R2_WRITE_SECRET_ACCESS_KEY }}
           REFRESH_OUTCOME: ${{ steps.sync.outcome }}
           SNAPSHOT_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/snapshot-status.js --write-daily
       - name: Publish daily source metadata
         if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ ! -f status.json ]; then exit 0; fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add status.json
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Update daily government snapshot status'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          gh api "repos/$GITHUB_REPOSITORY/contents/status.json?ref=snapshot-status" > "$RUNNER_TEMP/current-status.json"
+          CONTENT=$(base64 -w0 status.json)
+          PREVIOUS=$(jq -r .content "$RUNNER_TEMP/current-status.json" | tr -d '\n')
+          if [ "$CONTENT" = "$PREVIOUS" ]; then exit 0; fi
+          SHA=$(jq -r .sha "$RUNNER_TEMP/current-status.json")
+          gh api --method PUT "repos/$GITHUB_REPOSITORY/contents/status.json" \
+            -f branch=snapshot-status -f sha="$SHA" -f content="$CONTENT" \
+            -f message='Update daily government snapshot status' --silent
