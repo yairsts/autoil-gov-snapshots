@@ -80,6 +80,42 @@ do not prevent overlapping writers. Keep both legacy backend updater workflows
 disabled after the cutover. To roll back, disable this writer, wait for any active
 run to finish, then re-enable the old government refresh workflow.
 
+## Dev and Stage copies
+
+Dev and Stage share the private `autoil-nonprod-vehicle-snapshots` bucket, not the
+Production bucket. Their backend keys must be read-only and restricted to that
+non-production bucket. No app response or snapshot layout changes are needed.
+
+**Actions → Copy snapshots to Dev and Stage → Run workflow** copies all 17 current
+Production datasets. It also runs weekly on Sunday at 04:43 UTC when the repository
+variable `NONPROD_COPY_ENABLED` is `true`. Enable it only after a successful first
+copy and backend checks. This copies existing R2 data; it does not download from
+the government or change Production refresh frequency.
+
+Additional Actions secrets:
+
+- `SNAPSHOT_SOURCE_READ_ACCESS_KEY_ID` / `SNAPSHOT_SOURCE_READ_SECRET_ACCESS_KEY`:
+  read-only access to `autoil-private-vehicle-snapshots`.
+- `NONPROD_R2_WRITE_ACCESS_KEY_ID` / `NONPROD_R2_WRITE_SECRET_ACCESS_KEY`:
+  Object Read & Write access only to `autoil-nonprod-vehicle-snapshots`.
+
+The source key cannot write to Production. Source and destination bucket names
+are fixed in the copy script. Both workflows share a lock so source versions are
+not deleted during a copy. A new non-production manifest is published only after
+all of its shards have been copied and read back with matching SHA-256 hashes.
+Source dates are preserved; `copiedAt` records the copy time. The prior
+non-production version is retained. Failure leaves the previous manifest usable;
+failed uploads can leave unreferenced objects, included in the next storage check.
+Publication is per dataset, not one transaction across all 17 datasets.
+
+The copy checks the total size of both snapshot buckets plus incoming data against
+an 8 GB safety budget. R2's free allowance is shared across the account, not per
+bucket; other buckets and operations still need account-level monitoring. The
+Production updater's existing 8 GB per-bucket guard is not an account-wide cap.
+Weekly copies intentionally lag Production. Dev experiments also affect Stage.
+To roll back the backend configuration, restore Stage's original Production
+read-only bucket and key; do not change the Production backend.
+
 ## Source
 
 Updater code and its existing regression checks were extracted from Autoil
