@@ -301,7 +301,6 @@ if (require.main === module) {
 }
 
 module.exports = {
-  bucketBytes,
   buildSnapshot,
   normalizeRow,
   downloadUrl,
