@@ -66,6 +66,31 @@ test('a missing source shard leaves the old manifest available', async () => {
   const target = storage(TARGET_BUCKET, {[manifestKey(resource)]: old});
   await expect(copyResource(source, target, 'BUS', resource, manifest)).rejects.toThrow('missing');
   expect(String(target.objects[manifestKey(resource)])).toBe(old);
+  const cleanup = target.calls.at(-1);
+  expect(cleanup.operation).toBe('DeleteObjectsCommand');
+  expect(cleanup.Delete.Objects.every(({Key}) => !(Key in target.objects))).toBe(true);
+});
+
+test('copies at most four shards at once', async () => {
+  const many = {...resource, shardCount: 9};
+  const objects = Object.fromEntries(Array.from({length: 9}, (_, number) =>
+    [shardKey(many, VERSION, number), 'ab']));
+  const source = storage(SOURCE_BUCKET, objects);
+  const send = source.client.send;
+  let active = 0;
+  let maximum = 0;
+  source.client.send = async (command) => {
+    active += 1;
+    maximum = Math.max(maximum, active);
+    try {
+      await new Promise((resolve) => setImmediate(resolve));
+      return await send(command);
+    } finally { active -= 1; }
+  };
+  await copyResource(source, storage(TARGET_BUCKET), 'BUS', many,
+    {...manifest, shardCount: 9, storedBytes: 18});
+  expect(maximum).toBe(4);
+  expect(active).toBe(0);
 });
 
 test('read-back corruption stops publication', async () => {

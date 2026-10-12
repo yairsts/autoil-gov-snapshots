@@ -103,6 +103,7 @@ The source key cannot write to Production. Source and destination bucket names
 are fixed in the copy script. Both workflows share a lock so source versions are
 not deleted during a copy. A new non-production manifest is published only after
 all of its shards have been copied and read back with matching SHA-256 hashes.
+Up to four shards are copied at once; failed batches settle before cleanup.
 Source dates are preserved; `copiedAt` records the copy time. The prior
 non-production version is retained. Failure leaves the previous manifest usable;
 failed uploads can leave unreferenced objects, included in the next storage check.

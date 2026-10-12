@@ -99,9 +99,18 @@ async function retireVersion(target, resource, version) {
 async function copyShards(source, target, resource, manifest, version) {
   let storedBytes = 0;
   try {
-    for (let number = 0; number < resource.shardCount; number++) {
-      storedBytes += await copyShard(source, target,
-        shardKey(resource, manifest.version, number), shardKey(resource, version, number));
+    for (let start = 0; start < resource.shardCount; start += 4) {
+      const count = Math.min(4, resource.shardCount - start);
+      // Settle the whole batch before cleanup so no upload can race deletion.
+      const results = await Promise.allSettled(Array.from({length: count}, (_, offset) => {
+        const number = start + offset;
+        return copyShard(source, target,
+          shardKey(resource, manifest.version, number), shardKey(resource, version, number));
+      }));
+      for (const result of results) {
+        if (result.status === 'rejected') throw result.reason;
+        storedBytes += result.value;
+      }
     }
     if (storedBytes !== manifest.storedBytes) throw new Error('Copied snapshot size mismatch');
     return storedBytes;
