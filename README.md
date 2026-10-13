@@ -1,6 +1,6 @@
 # Autoil government snapshots
 
-This standalone tool builds, tests, and publishes validated snapshots of 17
+This standalone tool builds, tests, and publishes validated snapshots of 18
 public Israeli government vehicle datasets. It does not host the Autoil API.
 The application and backend repositories stay private.
 
@@ -14,10 +14,15 @@ npm test
 npm run gov:resources:sync
 ```
 
-The updater checks all 17 source hashes. Only changed datasets are downloaded.
+The updater checks all 18 source hashes. Only changed datasets are downloaded.
 It validates the download size, row count, and storage budget before publication.
 Shards are uploaded before the current manifest. Failed updates keep the last
 valid snapshot; the previous published version is retained.
+
+`PUBLIC` is the public-vehicle dataset (including taxis), resource
+`cf29862d-ca25-4691-84f6-1be60dcb4a1e`. It uses the same plate lookup and shard
+layout as the backend. Licensing and cancellation fields are preserved as source
+data; belonging to this dataset does not imply that a vehicle is currently active.
 
 ## GitHub configuration
 
@@ -87,7 +92,7 @@ Production bucket. Their backend keys must be read-only and restricted to that
 non-production bucket. No app response or snapshot layout changes are needed.
 
 **Actions → Government Resource Refresh (Dev and Stage) → Run workflow** checks
-all 17 government datasets using the same updater as Production. Only changed
+all 18 government datasets using the same updater as Production. Only changed
 files are downloaded and rebuilt. It runs weekly on Sunday at 04:43 UTC when
 `NONPROD_REFRESH_ENABLED` is `true`. Enable the schedule only after a successful
 first refresh and backend checks. Production's refresh frequency is unchanged.
@@ -102,7 +107,7 @@ key and uses a separate writer lock. The existing updater validates source size
 and row counts, uploads shards before publishing each manifest, and retains the
 previous valid version. Failure leaves the previous manifest usable; interrupted
 jobs can leave unreferenced objects, included in the next storage check.
-Publication is per dataset, not one transaction across all 17 datasets. Each run
+Publication is per dataset, not one transaction across all 18 datasets. Each run
 has its own Actions summary with source, download, and verification dates; it
 does not overwrite Production's daily status report.
 
@@ -111,7 +116,7 @@ free allowance is shared across all buckets and operations, so account-level
 usage monitoring is still required. Weekly snapshots intentionally lag the
 government. Dev experiments also affect Stage.
 Configure both backends with `GOV_DATA_SOURCE=snapshot-first`, the non-production
-bucket, and its read-only key only after all 17 datasets are available. A valid
+bucket, and its read-only key only after all 18 datasets are available. A valid
 empty snapshot result does not call the government. An unavailable, missing, or
 invalid snapshot uses the government as emergency fallback.
 To roll back the backend configuration, restore Stage's original Production

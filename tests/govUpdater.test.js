@@ -23,10 +23,41 @@ test('rejects an upload before exceeding the free-storage safety budget', () => 
 test('refreshes current status daily and large/reference datasets on Sunday', () => {
   const monday = selectedResources({scheduled: true, date: new Date('2026-09-28T03:17:00Z')});
   expect(monday.map(([name]) => name)).toContain('MISSING_RECALL');
+  expect(monday.map(([name]) => name)).toContain('PUBLIC');
   expect(monday.map(([name]) => name)).not.toContain('HISTORY_2');
-  expect(selectedResources({scheduled: true, date: new Date('2026-09-27T03:17:00Z')})).toHaveLength(17);
+  expect(selectedResources()).toHaveLength(18);
+  expect(selectedResources({scheduled: true, date: new Date('2026-09-27T03:17:00Z')})).toHaveLength(18);
+  expect(selectedResources({resourceName: 'PUBLIC'})).toEqual([['PUBLIC', RESOURCES.PUBLIC]]);
   expect(selectedResources({resourceName: 'BUS'})).toEqual([['BUS', RESOURCES.BUS]]);
   expect(() => selectedResources({resourceName: 'typo'})).toThrow('Unknown resource');
+});
+
+test('builds public-vehicle shards with numeric plate keys and unchanged cancellation evidence', async () => {
+  const resource = RESOURCES.PUBLIC;
+  expect(resource).toMatchObject({id: 'cf29862d-ca25-4691-84f6-1be60dcb4a1e',
+    encoding: 'utf-8', delimiter: '|', shardCount: 64, minRows: 50_000, minSourceBytes: 1_000_000});
+  const directory = await mkdtemp(join(tmpdir(), 'gov-public-test-'));
+  try {
+    const csv = Buffer.from('mispar_rechev|sug_rechev_cd|sug_rechev_nm|shnat_yitzur|' +
+      'mispar_mekomot|mispar_mekomot_leyd_nahag|degem_nm|bitul_cd|bitul_nm|bitul_dt|tokef_dt\n' +
+      '03147426|121|מונית|2026|3|1|RX450|0|לא מבוטל||2027-09-14\n' +
+      '07705769|11|אוטובוס|2015|50|0|BUS|1|מבוטל|2026-10-01|\n');
+    const built = await buildSnapshot(resource, Readable.from([csv]), directory, {minRows: 2});
+    expect(built).toMatchObject({count: 2, bytes: csv.length});
+    for (const [plate, expected] of [
+      [3147426, {sug_rechev_cd: 121, sug_rechev_nm: 'מונית', shnat_yitzur: 2026,
+        mispar_mekomot: 3, mispar_mekomot_leyd_nahag: 1, bitul_cd: '0',
+        bitul_dt: '', tokef_dt: '2027-09-14'}],
+      [7705769, {sug_rechev_nm: 'אוטובוס', bitul_cd: '1', bitul_nm: 'מבוטל',
+        bitul_dt: '2026-10-01', tokef_dt: ''}],
+    ]) {
+      const key = lookupKey(resource, {mispar_rechev: plate});
+      expect(key).toBe(lookupKey(resource, {mispar_rechev: String(plate).padStart(8, '0')}));
+      const rows = gunzipSync(await readFile(built.paths[shardNumber(key, resource.shardCount)]))
+        .toString('utf8').trim().split('\n').map(JSON.parse);
+      expect(rows.find((row) => row.mispar_rechev === plate)).toMatchObject(expected);
+    }
+  } finally { await rm(directory, {recursive: true, force: true}); }
 });
 
 test('uses exact padded plate keys and handles codes with leading zeroes', () => {
