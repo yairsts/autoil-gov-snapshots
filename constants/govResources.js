@@ -72,6 +72,10 @@ const RESOURCES = {
     ['mispar_rechev'], HEAVY_NUMBERS, {
       encoding: 'windows-1255', repairQuotes: true, minRows: 300_000, minSourceBytes: 60_000_000,
     }),
+  PUBLIC: defineResource('cf29862d-ca25-4691-84f6-1be60dcb4a1e',
+    ['mispar_rechev'], ['mispar_rechev', 'sug_rechev_cd', 'shnat_yitzur', 'mishkal_kolel',
+      'tozeret_cd', 'tzeva_cd', 'degem_cd', 'mispar_mekomot', 'mispar_mekomot_leyd_nahag'],
+    {minRows: 50_000, minSourceBytes: 1_000_000}),
   BUS: defineResource('91d298ed-a260-4f93-9d50-d5e3c5b82ce1',
     ['bus_license_id'], ['bus_license_id', 'SeatsNum', 'production_year', 'total_kilometer'], {
       delimiter: ',', minRows: 10_000, minSourceBytes: 1_000_000,
