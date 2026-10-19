@@ -1,169 +1,169 @@
 {
-  "checkedAt": "2026-10-18T05:06:29.523Z",
-  "refreshOutcome": "failure",
-  "runUrl": "https://github.com/yairsts/autoil-gov-snapshots/actions/runs/39097691768",
+  "checkedAt": "2026-10-19T05:20:29.788Z",
+  "refreshOutcome": "success",
+  "runUrl": "https://github.com/yairsts/autoil-gov-snapshots/actions/runs/39200853194",
   "resources": [
     {
       "name": "PRIVATE",
       "resourceId": "053cea08-09bc-40ec-8f7a-156f0677aff3",
       "state": "available",
-      "count": 4188224,
-      "sourceLastModified": "2026-10-18T02:21:52.047906",
-      "downloadedAt": "2026-10-18T04:39:29.232Z",
+      "count": 4188969,
+      "sourceLastModified": "2026-10-19T02:51:42.827091",
+      "downloadedAt": "2026-10-19T04:45:20.684Z",
       "sourceCheckedAt": null
     },
     {
       "name": "INACTIVE_PRIVATE",
       "resourceId": "f6efe89a-fb3d-43a4-bb61-9bf12a9b9099",
       "state": "available",
-      "count": 610036,
-      "sourceLastModified": "2026-10-18T02:20:31.861Z",
-      "downloadedAt": "2026-10-18T04:41:59.697Z",
-      "sourceCheckedAt": "2026-10-18T04:41:59.697Z"
+      "count": 609905,
+      "sourceLastModified": "2026-10-19T02:55:22.172Z",
+      "downloadedAt": "2026-10-19T04:48:42.845Z",
+      "sourceCheckedAt": "2026-10-19T04:48:42.845Z"
     },
     {
       "name": "MODEL_INFO",
       "resourceId": "142afde2-6228-49f9-8a29-9b6c3a0cbe40",
       "state": "available",
-      "count": 101961,
-      "sourceLastModified": "2026-10-18T02:21:05.153Z",
-      "downloadedAt": "2026-10-16T04:40:23.123Z",
-      "sourceCheckedAt": "2026-10-18T04:42:55.387Z"
+      "count": 101974,
+      "sourceLastModified": "2026-10-19T02:50:55.383Z",
+      "downloadedAt": "2026-10-19T04:50:11.718Z",
+      "sourceCheckedAt": "2026-10-19T04:50:11.718Z"
     },
     {
       "name": "HISTORY_1",
       "resourceId": "56063a99-8a3e-4ff4-912e-5966c0279bad",
       "state": "available",
-      "count": 2487193,
-      "sourceLastModified": "2026-10-18T02:19:56.917Z",
-      "downloadedAt": "2026-10-18T04:43:45.357Z",
-      "sourceCheckedAt": "2026-10-18T04:43:45.357Z"
+      "count": 2488275,
+      "sourceLastModified": "2026-10-19T02:54:56.682Z",
+      "downloadedAt": "2026-10-19T04:52:00.109Z",
+      "sourceCheckedAt": "2026-10-19T04:52:00.109Z"
     },
     {
       "name": "HISTORY_2",
       "resourceId": "bb2355dc-9ec7-4f06-9c3f-3344672171da",
       "state": "available",
-      "count": 5518479,
-      "sourceLastModified": "2026-10-18T02:21:00.467Z",
-      "downloadedAt": "2026-10-18T04:48:00.669Z",
-      "sourceCheckedAt": "2026-10-18T04:48:00.669Z"
+      "count": 5522357,
+      "sourceLastModified": "2026-10-19T02:55:35.058Z",
+      "downloadedAt": "2026-10-19T04:57:20.150Z",
+      "sourceCheckedAt": "2026-10-19T04:57:20.150Z"
     },
     {
       "name": "HEAVY",
       "resourceId": "cd3acc5c-03c3-4c89-9c54-d40f93c0d790",
       "state": "available",
-      "count": 423208,
-      "sourceLastModified": "2026-10-16T02:35:42.939Z",
-      "downloadedAt": "2026-10-16T04:47:50.191Z",
-      "sourceCheckedAt": "2026-10-17T20:38:31.372Z"
+      "count": 423259,
+      "sourceLastModified": "2026-10-19T02:50:34.514Z",
+      "downloadedAt": "2026-10-19T05:01:38.592Z",
+      "sourceCheckedAt": "2026-10-19T05:01:38.592Z"
     },
     {
       "name": "PUBLIC",
       "resourceId": "cf29862d-ca25-4691-84f6-1be60dcb4a1e",
       "state": "available",
-      "count": 66283,
-      "sourceLastModified": "2026-10-18T02:21:20.924Z",
-      "downloadedAt": "2026-10-18T04:51:34.229Z",
-      "sourceCheckedAt": "2026-10-18T04:51:34.229Z"
+      "count": 66282,
+      "sourceLastModified": "2026-10-19T02:56:01.004Z",
+      "downloadedAt": "2026-10-19T05:02:53.782Z",
+      "sourceCheckedAt": "2026-10-19T05:02:53.782Z"
     },
     {
       "name": "BUS",
       "resourceId": "91d298ed-a260-4f93-9d50-d5e3c5b82ce1",
       "state": "available",
       "count": 15379,
-      "sourceLastModified": "2026-10-17T10:35:12.575Z",
+      "sourceLastModified": "2026-10-18T10:39:52.063Z",
       "downloadedAt": "2026-10-17T10:47:18.448Z",
-      "sourceCheckedAt": "2026-10-18T04:52:21.329Z"
+      "sourceCheckedAt": "2026-10-19T05:03:43.417Z"
     },
     {
       "name": "EQUIPMENT",
       "resourceId": "58dc4654-16b1-42ed-8170-98fadec153ea",
       "state": "available",
-      "count": 185084,
-      "sourceLastModified": "2026-10-18T02:15:00.723Z",
-      "downloadedAt": "2026-10-18T04:52:31.373Z",
-      "sourceCheckedAt": "2026-10-18T04:52:31.373Z"
+      "count": 185129,
+      "sourceLastModified": "2026-10-19T02:50:13.448Z",
+      "downloadedAt": "2026-10-19T05:03:51.459Z",
+      "sourceCheckedAt": "2026-10-19T05:03:51.459Z"
     },
     {
       "name": "MOTORCYCLE",
       "resourceId": "bf9df4e2-d90d-4c0a-a400-19e15af8e95f",
       "state": "available",
-      "count": 192384,
-      "sourceLastModified": "2026-10-18T02:15:07.053Z",
-      "downloadedAt": "2026-10-18T04:53:31.384Z",
-      "sourceCheckedAt": "2026-10-18T04:53:31.384Z"
+      "count": 192454,
+      "sourceLastModified": "2026-10-19T02:50:39.293Z",
+      "downloadedAt": "2026-10-19T05:04:53.554Z",
+      "sourceCheckedAt": "2026-10-19T05:04:53.554Z"
     },
     {
       "name": "PRICE_LIST",
       "resourceId": "39f455bf-6db0-4926-859d-017f34eacbcb",
       "state": "available",
-      "count": 101961,
-      "sourceLastModified": "2026-10-18T02:15:12.571Z",
-      "downloadedAt": "2026-10-16T04:50:56.032Z",
-      "sourceCheckedAt": "2026-10-18T04:54:20.388Z"
+      "count": 101974,
+      "sourceLastModified": "2026-10-19T02:50:44.823Z",
+      "downloadedAt": "2026-10-19T05:05:53.447Z",
+      "sourceCheckedAt": "2026-10-19T05:05:53.447Z"
     },
     {
       "name": "DISABLED_CARD",
       "resourceId": "c8b9f9c8-4612-4068-934f-d4acd2e3c06e",
       "state": "available",
-      "count": 658619,
-      "sourceLastModified": "2026-10-17T21:19:47.187Z",
-      "downloadedAt": "2026-10-18T04:54:29.705Z",
-      "sourceCheckedAt": "2026-10-18T04:54:29.705Z"
+      "count": 657203,
+      "sourceLastModified": "2026-10-18T21:54:46.817Z",
+      "downloadedAt": "2026-10-19T05:06:47.482Z",
+      "sourceCheckedAt": "2026-10-19T05:06:47.482Z"
     },
     {
       "name": "INACTIVE_CARS",
       "resourceId": "6f6acd03-f351-4a8f-8ecf-df792f4f573a",
       "state": "available",
-      "count": 1441152,
-      "sourceLastModified": "2026-10-18T02:14:56.898Z",
-      "downloadedAt": "2026-10-18T04:56:04.577Z",
-      "sourceCheckedAt": "2026-10-18T04:56:04.577Z"
+      "count": 1441044,
+      "sourceLastModified": "2026-10-19T02:55:11.699Z",
+      "downloadedAt": "2026-10-19T05:08:21.557Z",
+      "sourceCheckedAt": "2026-10-19T05:08:21.557Z"
     },
     {
       "name": "CANCELED",
       "resourceId": "851ecab1-0622-4dbe-a6c7-f950cf82abf9",
       "state": "available",
-      "count": 1221958,
-      "sourceLastModified": "2026-10-18T02:20:20.706Z",
-      "downloadedAt": "2026-10-18T05:00:25.828Z",
-      "sourceCheckedAt": "2026-10-18T05:00:25.828Z"
+      "count": 1222557,
+      "sourceLastModified": "2026-10-19T02:50:08.127Z",
+      "downloadedAt": "2026-10-19T05:13:13.068Z",
+      "sourceCheckedAt": "2026-10-19T05:13:13.068Z"
     },
     {
       "name": "IMPORTED",
       "resourceId": "03adc637-b6fe-402b-9937-7c3d3afc9140",
       "state": "available",
-      "count": 27434,
-      "sourceLastModified": "2026-10-18T02:15:10.093Z",
-      "downloadedAt": "2026-10-18T05:03:47.280Z",
-      "sourceCheckedAt": "2026-10-18T05:03:47.280Z"
+      "count": 27438,
+      "sourceLastModified": "2026-10-19T02:50:42.955Z",
+      "downloadedAt": "2026-10-19T05:17:45.531Z",
+      "sourceCheckedAt": "2026-10-19T05:17:45.531Z"
     },
     {
       "name": "STATISTIC",
       "resourceId": "5e87a7a1-2f6f-41c1-8aec-7216d52a6cf6",
       "state": "available",
-      "count": 101961,
-      "sourceLastModified": "2026-10-18T02:15:08.741Z",
-      "downloadedAt": "2026-10-18T05:04:36.664Z",
-      "sourceCheckedAt": "2026-10-18T05:04:36.664Z"
+      "count": 101974,
+      "sourceLastModified": "2026-10-19T02:50:41.427Z",
+      "downloadedAt": "2026-10-19T05:18:33.061Z",
+      "sourceCheckedAt": "2026-10-19T05:18:33.061Z"
     },
     {
       "name": "MISSING_RECALL",
       "resourceId": "36bf1404-0be4-49d2-82dc-2f1ead4a8b93",
       "state": "available",
-      "count": 127082,
-      "sourceLastModified": "2026-10-18T02:20:36.595Z",
-      "downloadedAt": "2026-10-18T05:05:29.765Z",
-      "sourceCheckedAt": "2026-10-18T05:05:29.765Z"
+      "count": 126824,
+      "sourceLastModified": "2026-10-19T02:50:21.697Z",
+      "downloadedAt": "2026-10-19T05:19:22.741Z",
+      "sourceCheckedAt": "2026-10-19T05:19:22.741Z"
     },
     {
       "name": "RECALL_HISTORY",
       "resourceId": "2c33523f-87aa-44ec-a736-edbb0a82975e",
       "state": "available",
-      "count": 3644,
-      "sourceLastModified": "2026-10-18T02:20:40.031Z",
-      "downloadedAt": "2026-10-18T05:06:18.810Z",
-      "sourceCheckedAt": "2026-10-18T05:06:18.810Z"
+      "count": 3650,
+      "sourceLastModified": "2026-10-19T02:50:25.408Z",
+      "downloadedAt": "2026-10-19T05:20:18.980Z",
+      "sourceCheckedAt": "2026-10-19T05:20:18.980Z"
     }
   ]
 }
