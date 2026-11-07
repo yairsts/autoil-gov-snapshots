@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-11-06T07:26:26.376Z",
+  "checkedAt": "2026-11-07T06:01:34.172Z",
   "refreshOutcome": "failure",
-  "runUrl": "https://github.com/yairsts/autoil-gov-snapshots/actions/runs/42176915556",
+  "runUrl": "https://github.com/yairsts/autoil-gov-snapshots/actions/runs/42345031115",
   "resources": [
     {
       "name": "PRIVATE",
@@ -10,7 +10,7 @@
       "count": 4198990,
       "sourceLastModified": "2026-11-06T03:36:18.685804",
       "downloadedAt": "2026-11-06T06:52:35.384Z",
-      "sourceCheckedAt": null
+      "sourceCheckedAt": "2026-11-07T06:00:10.485Z"
     },
     {
       "name": "INACTIVE_PRIVATE",
@@ -19,7 +19,7 @@
       "count": 611062,
       "sourceLastModified": "2026-11-06T03:35:14.396Z",
       "downloadedAt": "2026-11-06T06:55:49.189Z",
-      "sourceCheckedAt": "2026-11-06T06:55:49.189Z"
+      "sourceCheckedAt": "2026-11-07T06:00:11.593Z"
     },
     {
       "name": "MODEL_INFO",
@@ -28,7 +28,7 @@
       "count": 102365,
       "sourceLastModified": "2026-11-06T03:35:45.355Z",
       "downloadedAt": "2026-11-06T06:57:15.480Z",
-      "sourceCheckedAt": "2026-11-06T06:57:15.480Z"
+      "sourceCheckedAt": "2026-11-07T06:00:12.639Z"
     },
     {
       "name": "HISTORY_1",
@@ -37,7 +37,7 @@
       "count": 2504157,
       "sourceLastModified": "2026-11-06T03:39:56.684Z",
       "downloadedAt": "2026-11-06T06:58:56.189Z",
-      "sourceCheckedAt": "2026-11-06T06:58:56.189Z"
+      "sourceCheckedAt": "2026-11-07T06:00:14.970Z"
     },
     {
       "name": "HISTORY_2",
@@ -46,7 +46,7 @@
       "count": 5575079,
       "sourceLastModified": "2026-11-06T03:40:09.325Z",
       "downloadedAt": "2026-11-06T07:04:08.330Z",
-      "sourceCheckedAt": "2026-11-06T07:04:08.330Z"
+      "sourceCheckedAt": "2026-11-07T06:00:15.936Z"
     },
     {
       "name": "HEAVY",
@@ -64,16 +64,16 @@
       "count": 66260,
       "sourceLastModified": "2026-11-06T03:40:32.907Z",
       "downloadedAt": "2026-11-06T07:08:20.921Z",
-      "sourceCheckedAt": "2026-11-06T07:08:20.921Z"
+      "sourceCheckedAt": "2026-11-07T06:00:23.270Z"
     },
     {
       "name": "BUS",
       "resourceId": "91d298ed-a260-4f93-9d50-d5e3c5b82ce1",
       "state": "available",
-      "count": 15385,
-      "sourceLastModified": "2026-11-05T11:35:17.306Z",
-      "downloadedAt": "2026-11-05T19:58:58.057Z",
-      "sourceCheckedAt": "2026-11-06T07:09:07.035Z"
+      "count": 15381,
+      "sourceLastModified": "2026-11-06T11:35:13.502Z",
+      "downloadedAt": "2026-11-06T19:26:25.000Z",
+      "sourceCheckedAt": "2026-11-07T06:00:24.376Z"
     },
     {
       "name": "EQUIPMENT",
@@ -82,7 +82,7 @@
       "count": 185769,
       "sourceLastModified": "2026-11-06T03:35:17.034Z",
       "downloadedAt": "2026-11-06T07:09:17.529Z",
-      "sourceCheckedAt": "2026-11-06T07:09:17.529Z"
+      "sourceCheckedAt": "2026-11-07T06:00:25.764Z"
     },
     {
       "name": "MOTORCYCLE",
@@ -91,7 +91,7 @@
       "count": 193308,
       "sourceLastModified": "2026-11-06T03:35:32.776Z",
       "downloadedAt": "2026-11-06T07:10:23.848Z",
-      "sourceCheckedAt": "2026-11-06T07:10:23.848Z"
+      "sourceCheckedAt": "2026-11-07T06:00:26.770Z"
     },
     {
       "name": "PRICE_LIST",
@@ -100,16 +100,16 @@
       "count": 102365,
       "sourceLastModified": "2026-11-06T03:35:37.251Z",
       "downloadedAt": "2026-11-06T07:11:28.043Z",
-      "sourceCheckedAt": "2026-11-06T07:11:28.043Z"
+      "sourceCheckedAt": "2026-11-07T06:00:28.096Z"
     },
     {
       "name": "DISABLED_CARD",
       "resourceId": "c8b9f9c8-4612-4068-934f-d4acd2e3c06e",
       "state": "available",
-      "count": 638301,
-      "sourceLastModified": "2026-11-05T22:39:47.643Z",
-      "downloadedAt": "2026-11-06T07:12:23.407Z",
-      "sourceCheckedAt": "2026-11-06T07:12:23.407Z"
+      "count": 638247,
+      "sourceLastModified": "2026-11-06T22:24:47.557Z",
+      "downloadedAt": "2026-11-07T06:00:34.207Z",
+      "sourceCheckedAt": "2026-11-07T06:00:34.207Z"
     },
     {
       "name": "INACTIVE_CARS",
@@ -118,7 +118,7 @@
       "count": 1441496,
       "sourceLastModified": "2026-11-06T03:35:07.818Z",
       "downloadedAt": "2026-11-06T07:14:07.849Z",
-      "sourceCheckedAt": "2026-11-06T07:14:07.849Z"
+      "sourceCheckedAt": "2026-11-07T06:01:20.904Z"
     },
     {
       "name": "CANCELED",
@@ -127,7 +127,7 @@
       "count": 1229730,
       "sourceLastModified": "2026-11-06T03:34:58.529Z",
       "downloadedAt": "2026-11-06T07:19:21.271Z",
-      "sourceCheckedAt": "2026-11-06T07:19:21.271Z"
+      "sourceCheckedAt": "2026-11-07T06:01:21.862Z"
     },
     {
       "name": "IMPORTED",
@@ -136,7 +136,7 @@
       "count": 27424,
       "sourceLastModified": "2026-11-06T03:35:35.990Z",
       "downloadedAt": "2026-11-06T07:23:47.163Z",
-      "sourceCheckedAt": "2026-11-06T07:23:47.163Z"
+      "sourceCheckedAt": "2026-11-07T06:01:22.969Z"
     },
     {
       "name": "STATISTIC",
@@ -145,7 +145,7 @@
       "count": 102365,
       "sourceLastModified": "2026-11-06T03:35:34.626Z",
       "downloadedAt": "2026-11-06T07:24:36.069Z",
-      "sourceCheckedAt": "2026-11-06T07:24:36.069Z"
+      "sourceCheckedAt": "2026-11-07T06:01:24.341Z"
     },
     {
       "name": "MISSING_RECALL",
@@ -154,7 +154,7 @@
       "count": 125504,
       "sourceLastModified": "2026-11-06T03:35:22.453Z",
       "downloadedAt": "2026-11-06T07:25:28.514Z",
-      "sourceCheckedAt": "2026-11-06T07:25:28.514Z"
+      "sourceCheckedAt": "2026-11-07T06:01:25.611Z"
     },
     {
       "name": "RECALL_HISTORY",
@@ -163,7 +163,7 @@
       "count": 3652,
       "sourceLastModified": "2026-11-06T03:35:25.030Z",
       "downloadedAt": "2026-11-06T07:26:16.479Z",
-      "sourceCheckedAt": "2026-11-06T07:26:16.479Z"
+      "sourceCheckedAt": "2026-11-07T06:01:26.734Z"
     }
   ]
 }
